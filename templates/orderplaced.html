@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order placed</title>
+    <link rel="icon" type="image/x-icon" href="../static/assets/QUICKLINK_copy.png">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: whitesmoke;
+            color: black;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        h1{
+            text-align:center;
+            color: darkgreen;
+        }
+
+        .placed-order-details-section {
+            padding: 20px;
+            background-color: white;
+            margin: 50px auto;
+            max-width: 600px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+    </style>
+</head>
+
+<body onload="resetForm()">
+    <section class="placed-order-details-section">
+        <h1>Order Placed successfully!</h1>
+        <hr>
+        <p><strong>Order ID:</strong> {{ order_id }}</p>
+        <p><strong>Tracking ID:</strong> {{ tracking_id }}</p>
+        <p><strong>Expected Delivery Date:</strong> {{ expected_delivery_date }}</p>
+        <p><strong>Total Order Price:</strong> {{ total_order_price }}</p>
+        <p><strong>Recipient Name:</strong> {{ recipient_name }}</p>
+        <p><strong>Recipient Contact:</strong> {{ recipient_contact }}</p>
+        <p><strong>Recipient Address:</strong> {{ recipient_address }}</p>
+        <hr>
+        <p><b>You can track your Order Using the Tracking ID {{ tracking_id }}</b></p>
+        <hr>
+        <button onclick="goBack()">Go Back</button>
+    </section>
+</body>
+
+<script>
+    // Go back to the previous page
+    function goBack() {
+        window.history.back();
+    }
+</script>
+</html>

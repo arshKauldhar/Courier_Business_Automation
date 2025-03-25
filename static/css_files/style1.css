@@ -1,0 +1,503 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    background-color: #000;
+}
+h1 {
+    text-align: center;
+    margin-bottom: 20px;
+    color:white;
+}
+.user-operation-container{
+    display: flex;
+    justify-content: space-around;
+    padding:10px;
+    background-color:#fafafa;
+  }
+
+.user-operation-option {
+    padding: 10px 10px;
+    justify-content:center;
+    width:30%;
+    text-align:center;
+    border-radius: 5px;
+    background-color: #f9f9f9;
+    cursor: pointer;
+    color:black;
+    font-size: 1.2em;
+    font-weight: bold;
+    border: 5px solid #000;
+  }
+
+.user-operation-option:hover {
+    background-color: #e0e0e0;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+input[type="tel"],
+input[type="submit"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    box-sizing: border-box;
+}
+input[type="submit"] {
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+header  {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    background-color: #333;
+    color: #fff;
+}
+
+.logo img {
+    height: 50px;
+}
+
+.navbar ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+}
+
+.navbar ul li {
+    display: inline;
+    margin-right: 20px;
+}
+
+.navbar ul li a {
+    text-decoration: none;
+    color: #fff;
+}
+
+.form-container{
+    display: none;
+}
+
+.user-section {
+    display: flex;
+    align-items: center;
+}
+
+/* Additional CSS for form container */
+#form-container {
+    background-color: rgba(255, 255, 255, 0.8); /* Semi-transparent white background */
+    position: absolute;
+
+    z-index: 1; /* Ensure form appears above video */
+}
+
+/* Adjustments for main content area */
+.main-content {
+    flex-grow: 1;
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    width:100%;
+    height: 100vh; /* Ensure main content area takes up entire viewport height */
+    position: relative; /* Ensure correct positioning for child elements */
+}
+
+/* Style for sidebar links */
+.sidebar ul li a {
+    text-decoration: none;
+    color: #333;
+    display: block;
+    padding: 10px;
+    transition: background-color 0.3s ease;
+}
+
+.sidebar ul li a:hover {
+    background-color: #ddd;
+}
+
+.content-area{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.img-handover{
+    width:fit-content;
+    text-align:center;
+    color: white;
+    width:50%;
+    padding: 10px;
+}
+
+#img-hand-over{
+    width:100%;
+    height:100%;
+}
+
+footer{
+    text-align: center;
+    color:white;
+    background:#484848;
+    padding: 10px;
+}
+
+
+.hidden {
+    display: none;
+}
+
+.navigation-buttons {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.navigation-buttons button {
+    margin: 0 10px;
+}
+.selected {
+    background-color: #d3d3d3;
+}
+
+
+
+    
+
+/* for calculator */
+.calculator-div {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    width: 30%; /* Adjust width as needed */
+    margin-right: 35%; /* Add margin for spacing */
+    margin-left: 35%;
+}
+
+.calculator-div h1 {
+    font-size: 24px;
+    margin-bottom: 20px;
+    color: white; /* Set text color */
+}
+
+.calculator-div label {
+    display: block;
+    margin-bottom: 10px;
+    color: white; /* Set text color */
+}
+
+.calculator-div input[type="number"] {
+    width: calc(100% - 40px); /* Adjust input width */
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.calculator-div input[type="number"]:focus {
+    outline: none;
+    border-color: #ffffff;
+}
+
+.calculator-div button {
+    background-color: white;
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.calculator-div button:hover {
+    background-color: gray;
+}
+
+.calculator-div #result {
+    margin-top: 20px;
+    font-size: 18px;
+    color: white; /* Set text color */
+}
+
+
+#track-order-section {
+    padding: 20px;
+}
+
+.container-for-track-order {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row; 
+    border-radius: 10px;
+}
+
+.track-order-form {
+    background-color: rgba(255, 255, 255, 0.1);
+    padding: 20px;
+    margin: 10px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    width: 50%; /* Adjust width as needed */
+}
+
+.track-order-form h2 {
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: white;
+}
+
+.track-order-form label {
+    display: block;
+    margin-bottom: 10px;
+    color: white;
+}
+
+.track-order-form input[type="text"] {
+    width: calc(100% - 20px);
+    padding: 8px;
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.track-order-form input[type="text"]:focus {
+    outline: none;
+    border-color: #ffffff;
+}
+
+.track-order-form button {
+    background-color: white;
+    color: black;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+.track-order-form button:hover {
+    background-color: gray;
+}
+
+#trackingResult {
+    margin-top: 20px;
+    font-size: 16px;
+    color: white;
+}
+.track-order-image{
+    padding: 20px;
+    width: 50%;
+}
+.track-order-image img {
+    width: 50%;
+    height: 50%;
+}
+
+
+/* form order place css */
+.div-containing-forms {
+    max-width: 600px;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+.popup-content {
+    border: 1px solid #ccc;
+    background-color: #fff;
+    border-radius: 5px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.div-containing-forms h2 {
+    margin-bottom: 15px;
+    color:black;
+}
+
+.div-containing-forms label {
+    display: block;
+    color:black;
+    margin-bottom: 5px;
+}
+
+#order-details-form input[type="tel"],
+input[type="text"],
+input[type="number"],
+input[type="date"] {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 15px;
+    border: 1px solid #1b1919;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.navigation-buttons {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.navigation-buttons button {
+    margin: 0 10px;
+    padding: 8px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+.navigation-buttons button:hover {
+    background-color: #0056b3;
+}
+
+input[type="submit"] {
+    padding: 8px 20px;
+    border: none;
+    border-radius: 4px;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+}
+
+input[type="submit"]:hover {
+    background-color: #0056b3;
+}
+
+
+.user-section {
+    display: flex;
+    align-items: center;
+}
+
+
+#logoutForm button {
+    text-decoration: none;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+
+.user-section img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-left: 10px;
+}
+
+
+
+
+/* my account popup  starts here */
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    padding: 20px;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 200px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 5px;
+    right: 0; /* Aligns dropdown to the right */
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.popup-visible {
+    display: block !important;
+}
+
+/* my account pop up ends  here */
+
+/* trackign table css starts here */
+.custom-table thead,
+        .custom-table tfoot {
+            background-color: #2c5e77;
+            color: #fff;
+        }
+
+        .custom-table tbody {
+            background-color: #1a1a1a;
+            color: #fff;
+        }
+
+        .custom-table {
+            border-collapse: collapse;
+            border: 2px solid #8c8c8c;
+            width: 100%;
+            margin-top: 20px;
+        }
+
+        .custom-table th,
+        .custom-table td {
+            border: 1px solid #a0a0a0;
+            padding: 8px 10px;
+        }
+
+        .custom-table th {
+            text-align: left;
+        }
+
+        .custom-table td {
+            text-align: center;
+        }
+
+        h2, h3 {
+            color: #fff;
+        }
+
+        label {
+            color: #fff;
+        }
+
+        input[type="text"] {
+            padding: 5px;
+            margin: 10px 0;
+        }
+
+        button {
+            padding: 5px 10px;
+            background-color: #2c5e77;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #1b3e50;
+        }
+
+        p {
+            color: #fff;
+        }
+/* tracking tabe css ends here  */

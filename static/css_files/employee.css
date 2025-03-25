@@ -1,0 +1,53 @@
+.Order-table-class th,
+.Order-table-class td {
+  border: 1px solid rgb(160 160 160);
+  padding: 8px 10px;
+}
+
+.Order-table-class th[scope='col'] {
+  background-color: #505050;
+  color: #fff;
+}
+
+.Order-table-class th[scope='row'] {
+    background-color: #d6ecd4;
+}
+
+.Order-table-class td {
+  text-align: center;
+}
+
+
+
+.Order-table-class {
+  border-collapse: collapse;
+  border: 2px solid rgb(140 140 140);
+  font-family: sans-serif;
+  font-size: 0.8rem;
+  letter-spacing: 1px;
+  margin-bottom: 20px; /* Adjust as needed */
+}
+
+.Order-table-class caption {
+  caption-side: bottom;
+  padding: 10px;
+}
+
+/* Button styling */
+.edit-button {
+  background-color: green;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  padding: 5px 10px;
+  cursor: pointer;
+  font-size: 0.8rem;
+}
+
+.edit-button:hover {
+  background-color: darkgreen;
+}
+
+.hidden {
+  display: none;
+}

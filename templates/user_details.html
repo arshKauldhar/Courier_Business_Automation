@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Details</title>
+    <style>
+        /* Add your CSS styles here */
+        .user-details {
+            margin: 20px;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            background-color: #f9f9f9;
+        }
+        .user-details h2 {
+            color: #333;
+        }
+        .user-details p {
+            margin: 5px 0;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="user-details">
+        <h2>User Details</h2>
+        <p><strong>Phone Number:</strong> {{ user_details[0] }}</p>
+        <p><strong>Password:</strong> *********</p> <!-- You may not want to display the password -->
+        <p><strong>Name:</strong> {{ user_details[2] }}</p>
+        <p><strong>Age:</strong> {{ user_details[3] }}</p>
+        <p><strong>Area/Village:</strong> {{ user_details[4] }}</p>
+        <p><strong>City:</strong> {{ user_details[5] }}</p>
+    </div>
+</body>
+</html>

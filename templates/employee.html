@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Dashboard</title>
+  <script src="../static/javascript_files/employee.js" defer></script>
+  <link  rel="stylesheet" href="../static/css_files/employee.css"/>
+    
+  <style>
+    /* CSS styles */
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      background-color: black;
+      color: white;
+    }
+
+    .container {
+      max-width: 100%;
+      padding: 10px;
+      border: 1px solid #ccc;
+      background-color: #333;
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+      color: #fff;
+    }
+
+    h1 {
+      margin: 0;
+    }
+
+    #btnLogout {
+      padding: 8px 16px;
+      background-color: #f44336;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+
+    #btnLogout:hover {
+      background-color: #d32f2f;
+    }
+
+    .operation-container {
+      display: flex;
+      justify-content: space-around;
+      padding: 10px;
+      background-color: #fafafa;
+    }
+
+    .operation-option {
+      padding: 10px;
+      justify-content:center;
+      width:30%;
+      text-align:center;
+      border-radius: 5px;
+      background-color: #f9f9f9;
+      cursor: pointer;
+      color:black;
+      font-size: 1.2em;
+      font-weight: bold;
+      border: 5px solid #000;
+  }
+  
+  .selected-operation {
+      background-color: #3976cc;
+      color: white;
+  }
+    .operation-option:hover {
+      background-color: #e0e0e0;
+    }
+
+    .employee-image-banner1 {
+      display: flex;
+      align-items: center;
+    }
+
+    img {
+      width: 50%;
+      height: 30%;
+    }
+
+    .impressive-text {
+      flex: 1;
+      padding: 20px;
+    }
+
+    .impressive-text h2 {
+      font-size: 2em;
+      margin-bottom: 20px;
+    }
+
+    .impressive-text ul {
+      list-style-type: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .impressive-text ul li {
+      margin-bottom: 10px;
+    }
+
+    .impressive-text ul li::before {
+      content: "✓";
+      margin-right: 10px;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+    </head>
+<body>
+  <div class="container">
+    <header>
+      <h1>Employee Dashboard</h1>
+      <div class="nav-bar-employee">
+        {% if username %}
+            <div id="userid-containing-div">
+                Logged in as: {{ username }}
+            </div>
+        {% endif %}
+    </div>  
+    <button id="btnLogout" onclick="logOut()">Log-out</button>
+    </header>
+  </div>
+
+  <div class="operation-container">
+    <div class="operation-option" id="orderbtn">View Orders</div>
+    <div class="operation-option" id="trackbtn">Update Tracking</div>
+    <div class="operation-option" id="billbtn">View Bills</div>
+</div>
+
+
+    <!-- New "All Orders" section -->
+    <section id="ordersection" class="hidden">
+      <h2>All Orders</h2>
+      <table id="ordersTable" border="1" class="Order-table-class">
+        <thead>
+            <tr>
+              <th>Order ID</th>
+              <th>Order Date</th>
+              <th>Pick-up Address</th>
+              <th>Actual Delivery Date</th>
+              <th>Order Weight</th>
+              <th>Pick Employee ID</th>
+              <th>Delivery Employee ID</th>
+              <th>Bill ID</th>
+              <th>Tracking ID</th>
+              <th>Start Location</th>
+              <th>Sender ID</th>
+              <th>Recipient ID</th>
+              <th>Action</th>
+            </tr>
+        </thead>
+        <tbody id="ordersTableBody">
+            <!-- Table rows will be dynamically added here -->
+        </tbody>
+    </table>
+
+    </section>
+
+    <section id="tracksection" class="hidden">
+      <h2>Tracking Section</h2>
+      <form id="updateForm">
+          <label for="trackingId">Enter Tracking ID:</label>
+          <input type="text" id="trackingId" name="trackingId" required>
+          <label for="pickupTime">Pickup Time:</label>
+          <input type="datetime-local" id="pickupTime" name="pickupTime" required>
+          <label for="status">Current Status:</label>
+          <input type="text" id="status" name="status" required>
+          <label for="receivedTime">Received Time:</label>
+          <input type="datetime-local" id="receivedTime" name="receivedTime" required>
+          <label for="receiverName">Receiver Name:</label>
+          <input type="text" id="receiverName" name="receiverName" required>
+          <label for="receiverRelation">Receiver Relation:</label>
+          <input type="text" id="receiverRelation" name="receiverRelation" required>
+          <button type="submit">Update Tracking</button>
+      </form>
+      <div id="updateResult"></div>
+  </section>
+  
+    
+
+    <div class="employee-image-banner1">
+      <img src="../static/assets/Login-Banner1.png" alt="img-employees">
+      <!-- Impressive text -->
+      <div class="impressive-text">
+        <h2>Welcome to the Employee Dashboard</h2>
+        <ul>
+          <li>Stay organized with your tasks</li>
+          <li>Effortlessly manage orders and deliveries</li>
+          <li>Track your progress with ease</li>
+          <li>Empower your efficiency and productivity</li>
+        </ul>
+      </div>
+    </div>
+
+    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</body>
+</html>

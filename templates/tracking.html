@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order Tracking</title>
+    <style>
+        table {
+            border-collapse: collapse;
+            width: 100%;
+        }
+        th, td {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+    </style>
+</head>
+<body>
+    <h2>Order Tracking</h2>
+    <form id="trackingForm">
+        <label for="trackingId">Enter Tracking ID:</label>
+        <input type="text" id="trackingId" name="trackingId" required>
+        <button type="submit">Track Order</button>
+    </form>
+    <div id="trackingResult"></div>
+
+    <script>
+        document.getElementById('trackingForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var trackingId = document.getElementById('trackingId').value;
+    
+            // Fetch data from Flask server
+            fetch('/get_tracking?trackingId=' + trackingId)
+            .then(response => response.json())
+            .then(data => {
+                // Display tracking information
+                var trackingResultDiv = document.getElementById('trackingResult');
+                if (data.length === 0) {
+                    trackingResultDiv.innerHTML = '<p>No tracking information found for the provided ID.</p>';
+                } else {
+                    var tableHTML = '<h3>Tracking Information</h3><table>';
+                    tableHTML += '<tr><th>Tracking ID</th><th>Start Location</th><th>Pickup Time</th><th>Current Status</th><th>Destination Location</th><th>Received Time</th></tr>';
+                    data.forEach(function(row) {
+                        tableHTML += '<tr>';
+                        tableHTML += '<td>' + row.Tracking_id + '</td>';
+                        tableHTML += '<td>' + row.Start_location + '</td>';
+                        tableHTML += '<td>' + row.Pickup_time + '</td>';
+                        tableHTML += '<td>' + row.Current_status + '</td>';
+                        tableHTML += '<td>' + row.Destination_location + '</td>';
+                        tableHTML += '<td>' + row.Received_time + '</td>';
+                        tableHTML += '</tr>';
+                    });
+                    tableHTML += '</table>';
+                    trackingResultDiv.innerHTML = tableHTML;
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching tracking data:', error);
+                document.getElementById('trackingResult').innerHTML = '<p>An error occurred while fetching tracking information. Please try again later.</p>';
+            });
+        });
+    </script>
+    
+</body>
+</html>

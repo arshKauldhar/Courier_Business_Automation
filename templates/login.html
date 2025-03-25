@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login and Create Account</title>
+    <style>
+        /* Basic reset */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .login-form-container {
+            background: #fff;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            margin: 10px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .create-account-form-container {
+            background: #e9f7ef;
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            max-width: 400px;
+            width: 100%;
+            margin: 10px;
+            display: none;
+            flex-direction: column;
+        }
+
+        form h2 {
+            margin-bottom: 20px;
+            text-align: center;
+            color: #007bff;
+        }
+
+        .create-account-form-container h2 {
+            color: #28a745;
+        }
+
+        form label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+        }
+
+        form select, 
+        form input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .login-form-container form button, 
+        .login-form-container form input[type="submit"],
+        .create-account-form-container form button, 
+        .create-account-form-container form input[type="submit"] {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .login-form-container form button:hover, 
+        .login-form-container form input[type="submit"]:hover,
+        .create-account-form-container form button:hover, 
+        .create-account-form-container form input[type="submit"]:hover {
+            background-color: #0056b3;
+        }
+
+        .close-btn {
+            background-color: #dc3545;
+            margin-top: 10px;
+        }
+
+        .close-btn:hover {
+            background-color: #c82333;
+        }
+
+        #links-below-login {
+            text-align: center;
+            margin:20px;
+        }
+
+        #links-below-login a {
+            color: #007bff;
+            text-decoration: none;
+        }
+
+        #links-below-login a:hover {
+            text-decoration: underline;
+        }
+
+        /* Error message styling */
+        div[style*="display: none"] {
+            display: none;
+        }
+
+        div[style*="display: block"] {
+            display: block;
+            color: red;
+            margin-top: 10px;
+            text-align: center;
+        }
+
+        .form-group {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            flex: 1;
+            margin-bottom: 0;
+            margin-right: 10px;
+        }
+
+        .form-group input {
+            flex: 2;
+        }
+        
+    </style>
+</head>
+<body>
+
+<div class="login-form-container">
+    <div id="login-form-div">
+        <form action="/login/login_submit" method="POST" id="login-form">
+            <h2>Login</h2>
+            <label for="role">Choose a Role:</label>
+            <select id="role" name="role">
+                <option value="user">User</option>
+                <option value="admin">Admin</option>
+                <option value="employee">Employee</option>
+            </select>
+            <label for="username">Username</label>
+            <input type="text" id="username" name="username" placeholder="Phone or email..." required>
+            <label for="pwd">Password:</label>
+            <input type="password" id="pwd" name="pwd" placeholder="Password" required>
+            <button type="submit">Submit</button>
+            <div id="links-below-login">
+                <a id="create-account-link" href="#" onclick="toggleForm()">New User? Create account</a><br>
+            </div>
+            <div style="display: {% if not error_msg %}none{% endif %};">
+                {% if error_msg %}
+                <h5 style="color: red;">{{ error_msg }}</h5>
+                {% endif %}
+            </div>
+        </form>
+    </div>
+</div>
+
+<div class="create-account-form-container">
+    <form action="http://127.0.0.1:5000/submit_account_form" method="POST">
+        <h2>Create Account</h2>
+        <div class="form-group">
+            <label for="phone">User ID:</label>
+            <input type="text" id="phone" name="phone" placeholder="Login with phone or email..." required>
+        </div>
+        <div class="form-group">
+            <label for="password">Create Password:</label>
+            <input type="password" id="password" name="password" placeholder="Example: abc@12" required>
+        </div>
+        <div class="form-group">
+            <label for="name">Name:</label>
+            <input type="text" id="name" name="name" required>
+        </div>
+        <div class="form-group">
+            <label for="age">Age:</label>
+            <input type="number" id="age" name="age" required>
+        </div>
+        <div class="form-group">
+            <label for="address">Area/Sector/Village:</label>
+            <input type="text" id="address" name="address" required>
+        </div>
+        <div class="form-group">
+            <label for="city">City:</label>
+            <input type="text" id="city" name="city" required>
+        </div>
+        <input type="submit" value="Submit">
+        <button type="button" class="close-btn" onclick="closeForm()">Close</button>
+    </form>
+</div>
+
+<script>
+    function toggleForm() {
+        document.querySelector('.login-form-container').style.display = 'none';
+        document.querySelector('.create-account-form-container').style.display = 'flex';
+    }
+
+    function closeForm() {
+        document.querySelector('.create-account-form-container').style.display = 'none';
+        document.querySelector('.login-form-container').style.display = 'flex';
+    }
+</script>
+
+</body>
+</html>

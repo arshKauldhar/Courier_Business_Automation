@@ -1,0 +1,186 @@
+.nav-buttons{
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    flex-direction: row;
+}
+
+ul li a {
+    text-decoration: none;
+    color: white;
+    font-weight: bold;
+    padding: 5px 10px;
+    border-radius: 5px;
+    font-size: large;
+}
+
+ul li a:hover{
+    background-color: #e50914;
+}
+
+ul {
+    list-style-type: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: flex-end;
+}
+  
+.navbar{
+    padding-top: 1%;
+    padding-left: 2vw;
+    padding-right: 4vw;
+    height:10vh;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: row;
+}
+
+.img-logo{
+    width:10%;
+    color: #e50914;
+    padding-left: 4vw;
+  }
+
+.btn-login{
+    padding-left: 20px;
+    padding-right: 20px;
+    padding-top: 8px;
+    padding-bottom: 8px;
+    background-color: #e50914;
+    color:white;
+    width:fit-content ;
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+body{
+    margin: 0px;
+    padding: 0px;
+    
+}
+
+.root{
+    background-size: cover;
+    background-image:radial-gradient(rgba(0,0,0,0.6),rgba(0,0,0,0.8)),url("../assets/backpic.jpg");
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+.main-container {
+    width: 100%;
+    height:90vh;
+    display:flex;
+    justify-content: center;
+    align-items:center;
+    flex-direction:column;
+}
+.main-title-container{
+    text-align:center;
+    color: white;
+    width:50%;
+}
+
+.main-title{
+    font-size: 3.0em;
+    margin-bottom: 14px;
+}
+.main-subtitle{
+    font-family: Arial, Helvetica, sans-serif;
+    font-size: 1.5em;
+}
+
+.section-container{
+    
+    justify-content: space-around;
+    align-items: center;
+    font-style: normal;
+    font-weight: 500;
+    padding-left: 10px;
+    padding-right: 10px;
+    /* border-top: 5px solid rgb(98, 94, 94); */
+    margin-top: 10px;  
+}
+
+#about-class {
+    justify-content:space-around;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding-top: 10px;
+    padding-bottom: 8px;
+}
+
+#about-class > div {
+    flex: -1; 
+    text-align: center; 
+}
+
+.handpick{
+    height:40vh;
+    width:70vh;
+    border:white solid 6px;
+}
+
+
+.container {
+    width:50%;
+    height:30%;
+    padding: 40px; /* Padding around each image */
+}
+
+.pic-contact-sec{
+    max-width: 90%; 
+    height: auto;
+    border:white solid 6px;
+}
+
+
+
+footer {
+    background-color: #000000;
+    color: #fff;
+    padding: 20px 0;
+    text-align: center;
+
+    left: 0;
+    width: 100%;
+}
+  footer p {
+    margin: 0;
+  }
+  footer a {
+    color: #fff;
+    text-decoration: none;
+  }
+
+/* services section start */
+/* General Section Styling */
+#services {
+    background-color: #000000; /* Light gray background */
+    padding: 40px 0;
+    text-align: center;
+}
+
+.section-container h1 {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    color: #ffffff;
+}
+
+/* Image Row Styling */
+.image-row {
+    display: flex; /* Align images in a row */
+    justify-content: center; /* Center the images horizontally */
+    gap: 20px; /* Add space between images */
+}
+
+.image-row img {
+    max-width: 350px; /* Limit the width of each image */
+    height: 400px; /* Maintain aspect ratio */
+    border-radius: 10px; /* Optional: Add rounded corners */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Optional: Add shadow effect */
+}
+
+

@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Courier System Admin Panel</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <link rel="stylesheet" href="../static/css_files/adminSTYLE.css">
+    <script src="../static/javascript_files/admin.js" defer></script>
+</head>
+<body>
+    <div class="nav-bar-admin">
+        <h1>Admin Panel</h1>
+        {% if username %}
+            <div id="userid-containing-div">
+                Logged in as: {{ username }}
+            </div>
+        {% endif %}
+        <button id="btnLogout" onclick="logOut()">Log-out</button>
+    </div>    
+
+    
+    <section id="employeeManagement" class="section">
+        <h2>Employee Management</h2>
+    
+        <!-- Operation selection buttons -->
+        <div class="operation-buttons">
+            <button class="btn-add">Add New Employee</button>
+            <button class="btn-update">Update Employee Information</button>
+            <button class="btn-remove">Remove Employee</button>
+            <button class="btn-search">Search for Employees</button>
+        </div>
+    
+        <!-- Form to add a new employee -->
+        <div class="form-container add-form" style="display: none;">
+            <h3>Add New Employee</h3>
+            <form class="add-form-employee" action="/admin/add_employee" method="post">
+                <input type="text" name="phone" placeholder="Phone number" required>
+                <input type="password" name="password" placeholder="Password" required>
+                <input type="text" name="name" placeholder="Name" required>
+                <input type="number" name="age" placeholder="Age" required>
+                <input type="text" name="address" placeholder="Address" required>
+                <input type="text" name="city" placeholder="City" required>
+                <input type="text" name="role" placeholder="Role" required>
+                <input type="text" name="designation" placeholder="Designation" required>
+                <input type="date" name="join_date" placeholder="Join_Date" required>
+                <input type="text" name="e_branch_id" placeholder="Branch_id" required>
+                <input class="action-buttons" type="submit" value="Submit">
+            </form>
+        </div>
+    
+        <!-- Form to update employee information -->
+        <div class="form-container update-form" style="display: none;">
+            <h3>Update Employee Information</h3>
+            <form class="update-form-employee" action="/admin/update_employee" method="post">
+                <input type="text" name="emp_user_id" placeholder="Employee User ID" required>
+                <input type="text" name="new_address" placeholder="Employee' New address" required>
+                <input type="text" name="new_city" placeholder="Employee's New City" required>
+                <input type="text" name="e_branch_id" placeholder="Branch_id" required>
+                <input class="action-buttons" type="submit" value="Update">
+            </form>
+        </div>
+    
+        <!-- Form to remove an employee -->
+        <div class="form-container remove-form" style="display: none;">
+            <h3>Remove Employee</h3>
+            <form class="remove-form-employee" action="/admin/delete_employee" method="post">
+                <input type="text" name="emp_user_id" placeholder="User ID" required>
+                <input class="action-buttons" type="submit" value="Remove">
+            </form>
+        </div>
+    
+        <!-- Display list of employees -->
+        <div class="form-container search-form">
+            <h3>Search for Employees</h3>
+            <button id="search-btn" class="action-buttons">Show all Employees</button><br>
+            <table border="1" class="custom-table" id="employee-table">
+                <thead>
+                    <tr>
+                        <th>Employee User ID (Phone Number)</th>
+                        <th>Designation</th>
+                        <th>Join Date</th>
+                        <th>Name</th>
+                        <th>Age</th>
+                        <th>Address</th>
+                        <th>City</th>
+                        <th>Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for employee in Employees %}
+                        <tr>
+                            <td>{{ employee[0] }}</td>
+                            <td>{{ employee[1] }}</td>
+                            <td>{{ employee[2] }}</td>
+                            <td>{{ employee[3] }}</td>
+                            <td>{{ employee[4] }}</td>
+                            <td>{{ employee[5] }}</td>
+                            <td>{{ employee[6] }}</td>
+                            <td>{{ employee[7] }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    
+    </section>
+    
+    <section id="branchManagement" class="section">
+        <h2>Branch Management</h2>
+    
+        <!-- Operation selection buttons -->
+        <div class="operation-buttons">
+            <button class="btn-add">Add New Branch</button>
+            <button class="btn-update">Update Branch Information</button>
+            <button class="btn-remove">Remove Branch</button>
+            <button class="btn-search">Show Branches</button>
+        </div>
+    
+        <!-- Form to add a new branch -->
+        <div class="form-container add-form" style="display: none;">
+            <h3>Add New Branch</h3>
+            <form class="add-form-branch" action="/admin/add_branch" method="post">
+                <input type="number" name="branch_id" placeholder="Branch ID" required>
+                <input type="text" name="city" placeholder="City" required>
+                <input type="text" name="address" placeholder="Address" required>
+                <input type="text" name="contact" placeholder="Contact No." required>
+                <input type="number" name="manager_id" placeholder="Manager ID" required>
+                <input class="action-buttons" type="submit" value="Submit">
+            </form>
+        </div>
+    
+        <!-- Form to update branch information -->
+        <div class="form-container update-form" style="display: none;">
+            <h3>Update Branch Information</h3>
+            <form class="update-form-branch" action="/admin/update_branch" method="post">
+                <input type="number" name="branch_id" placeholder="Branch ID" required>
+                <input type="text" name="city" placeholder="New City">
+                <input type="text" name="address" placeholder="New Address">
+                <input type="text" name="contact" placeholder="New Contact No.">
+                <input type="number" name="manager_id" placeholder="New Manager ID" required>
+                <input class="action-buttons" type="submit" value="Update">
+            </form>
+        </div>
+    
+        <!-- Form to remove a branch -->
+        <div class="form-container remove-form" style="display: none;">
+            <h3>Remove Branch</h3>
+            <form class="remove-form-branch" action="/admin/delete_branch" method="post">
+                <input type="number" name="branch_id" placeholder="Branch ID" required>
+                <input class="action-buttons" type="submit" value="Remove">
+            </form>
+        </div>
+    
+        <!-- Display list of branches -->
+        <div class="form-container search-form">
+            <h3>Branch Information</h3>
+            <button id="show-branches-btn" class="action-buttons">Show all Branches</button><br>
+            <table border="1" class="custom-table" id="branch-table">
+                <thead>
+                    <tr>
+                        <th>Branch ID</th>
+                        <th>City</th>
+                        <th>Address</th>
+                        <th>Branch Phone</th>
+                        <th>Manager ID</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for branch in Branches %}
+                        <tr>
+                            <td>{{ branch[0] }}</td>
+                            <td>{{ branch[1] }}</td>
+                            <td>{{ branch[2] }}</td>
+                            <td>{{ branch[3] }}</td>
+                            <td>{{ branch[4] }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+        
+    </section>
+    
+    <section id="orderManagement" class="section">
+        <h2>Order Management</h2>
+    
+        <!-- Operation selection buttons -->
+        <div class="operation-buttons"> 
+            <button class="btn-add">Add Employee for Order Pickup</button>
+            <button class="btn-update">Add Employee for Order delivery</button>
+            <button class="btn-search">All Orders</button>
+        </div>
+    
+        <!-- Form to add a new order -->
+        <div class="form-container add-form" style="display: none;">
+            <h3>Add PickUp Employee for Order</h3>
+            <form class="add-form-order" action="/admin/add_pickup_emp" method="post">
+                <input type="number" name="order_id" placeholder="Order ID" required>
+                <input type="text" name="pick_emp_id" placeholder="Pick-up Employee ID" required>
+                <input class="action-buttons" type="submit" value="Submit">
+            </form>
+        </div>
+    
+        <!-- Form to update order information -->
+        <div class="form-container update-form" style="display: none;">
+            <h3>Add Delivery Employee for Order</h3>
+            <form class="update-form-order" action="/admin/add_delivery_emp" method="post">
+                <input type="number" name="order_id" placeholder="Order ID" required>
+                <input type="text" name="delivery_emp_id" placeholder="Delivery Employee ID" required>
+                <input class="action-buttons" type="submit" value="Submit">
+            </form>
+        </div>
+    
+        <!-- Display list of orders -->
+        <div class="form-container search-form">
+            <h3>Search for Orders</h3>
+            <button id="search-orders-btn" class="action-buttons">Show all Orders</button><br>
+            <table border="1" class="custom-table" id="order-table">
+                <thead>
+                    <tr>
+                        <th>Order ID</th>
+                        <th>Date</th>
+                        <th>Pick Employee ID</th>
+                        <th>Delivery Employee ID</th>
+                        <th>Sender ID</th>
+                        <th>Recipient ID</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for order in Orders %}
+                        <tr>
+                            <td>{{ order[0] }}</td>
+                            <td>{{ order[1] }}</td>
+                            <td>{{ order[2] }}</td>
+                            <td>{{ order[3] }}</td>
+                            <td>{{ order[4] }}</td>
+                            <td>{{ order[5] }}</td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+
+    </section> 
+
+    
+    
+</body>
+</html>

@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>User panel</title>
+    <link rel="icon" type="image/x-icon" href="../static/assets/QUICKLINK_copy.png">
+    <link  rel="stylesheet" href="../static/css_files/style1.css"/>
+    
+</head>
+<body>
+    <header>
+        <div class="logo">
+            <img src="../static/assets/QUICKLINK_copy.png" alt="Courier Business Service Logo">
+        </div>
+        <nav class="navbar">
+            <ul>
+                <li><a href="/">Home</a></li>
+                <li><a href="/contact">Contact</a></li>
+                <li><a href="/help">Help</a></li>
+            </ul>
+        </nav>
+        <div class="user-section">
+            <div class="dropdown">
+                <img onclick="toggleDropdown()" src="../static/assets/user.gif" alt="User Icon" id="userIcon">
+                <div id="dropdownContent" class="dropdown-content">
+                {% if username and P_name %}
+                <p style="color: black;">Welcome, {{P_name}}</p>
+                <p style="color: black;">Logged in as: {{username}}</p>
+                {% endif %}
+                <hr>
+                    <a href="/orders">My Orders</a>
+                    <a href="/account_profile">Personal Details</a>
+                    <a href="/change_password">Change Password</a>
+                    <hr>
+                    <form id="logoutForm" action="/logout" method="POST">
+                        <button type="submit">Logout</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </header>
+    
+        
+    <div class="user-operation-container">
+        <div class="user-operation-option" id="place-order-btn">📦 Place Order</div>
+        <div class="user-operation-option" id="track-order-btn">🛵 Track Order</div>
+        <div class="user-operation-option" id="calculate-bill-btn">📃 Calculate Bill</div>
+    </div>
+
+  <section id="place-order-section" class="hidden">
+          <div class="div-containing-forms" >
+            <form action="/user/add_order_details" method="POST" class="popup-content" id="combined-form" >
+                <!-- Recipient Details Form -->
+                <div id="recipient-form-popup">
+                    <h2>Fill Recipient Details:</h2><br>
+                    <label for="phone">Phone Number:</label>
+                    <input type="tel" id="phone" name="R_phone" placeholder="Recipient's Phone_no." required><br>
+
+                    <label for="name">Name:</label>
+                    <input type="text" id="name" name="recipient_name" required><br>
+
+                    <label for="address">Area/Sector/Village:</label>
+                    <input type="text" id="address" name="address" required>
+
+                    <label for="city">City:</label>
+                    <input type="text" id="city" name="R_City" required><br>
+
+                    <div class="navigation-buttons">
+                        <button type="button" onclick="showForm('recipient-form-popup')">Back</button>
+                        <button type="button" onclick="showForm('order-details-form')">Next</button>
+                    </div>
+                </div>
+
+                <!-- Order Details Form -->
+                <div id="order-details-form" class="hidden">
+                    <h2>Fill Order details:</h2><br>
+                    <input type="hidden" name="sender-id" value="{{username}}" readonly>
+
+                    <label for="pick_up_address">Pick-up Address:</label>
+                    <input type="text" id="pick_up_address" name="pick_up_address" required><br></br>
+
+                    <label for="pick_up_city">Pick-up City:</label>
+                    <input type="text" id="pick_up_city" name="pick_up_city" required><br></br>
+
+                    <label for="preferred_delivery_date">Preferred Delivery Date:</label>
+                    <input type="date" id="preferred_delivery_date" name="preferred_delivery_date"><br></br>
+
+                    <label for="order_description">Order Description:</label>
+                    <input type="text" id="order_description" name="order_description" required><br></br>
+
+                    <label for="order_weight">Order Weight(Kg):</label>
+                    <input type="text" id="order_weight" min="0" name="order_weight" placeholder="in kg ONLY"><br></br>
+
+                    <label for="order_distance">Distance Between Source and Destination (km) :</label>
+                    <input type="number" id="order_distance" min="0" name="distance" placeholder="in km ONLY"/><br></br>
+
+                    <label for="bill_count">Total Bill:</label>
+                    <input type="number" step=".01" id="totalBill" name="totalBill" readonly><br></br>
+
+                    <label for="mode">Mode of Payment:</label>
+                    <input type="text" id="mode" name="mode" placeholder="online/offline" required/><br>
+                    <input type="submit" value="Submit">
+                    <div class="navigation-buttons">
+                        <button type="button" onclick="showForm('recipient-form-popup')">Back</button>
+                        <button type="button" onclick="showForm('order-details-form')">Next</button>
+                    </div>
+                </div>  
+            </form>
+        </div>
+  </section>
+
+
+    <section id="track-order-section" class="hidden">
+        <div class="container-for-track-order">
+            <form class="track-order-form" id="trackingForm">
+                <h2>Track Your Order</h2>
+                <label for="trackingId">Tracking ID:</label>
+                <input type="text" id="trackingId" placeholder="Tracking ID"><br><br>
+                <button type="submit">Track Order</button>
+            </form>
+            <div id="trackingResult"></div>
+            <div class="track-order-image">
+                <img src="../static/assets/Track_Order.png" alt="Track Order Image">
+            </div>
+        </div>
+    </section>
+
+    <section id="calculate-bill-section" class="hidden">
+        
+        <div class="calculator-div">
+            <h1>Shipping Calculator </h1>
+            <label for="distance">Distance (km):</label>
+            <input type="number" id="distance" min="0" step="any" placeholder="in km ONLY"/><br/><br/>
+            
+            <label for="weight">Weight (kg):</label>
+            <input type="number" id="weight" min="0" step="any" placeholder="in kg ONLY"/><br/><br/>
+
+            <button onclick="calculateBill()">Calculate Bill</button><br><br>
+            <div id="result"></div>
+        </div>
+    
+    </section>
+
+    <div class="content-area">
+    <div class="img-handover">
+        <img  id="img-hand-over" src="../static/assets/handover.jpg" alt="Handing over package image">
+    </div>
+    
+    <div class="img-handover">
+        <h1>Streamline Logistics, Exceed Expectations</h1><br>
+        <h2>Effortlessly manage routes, track deliveries, and delight customers with our intuitive courier automation platform.</h2><br>
+        <h3>Elevate your logistics now!</h3>
+    </div>
+    </div>
+
+    <footer>
+        <p>&copy; 2024 User Panel. All rights reserved.</p>
+    </footer>
+    <script  src="../static/javascript_files/script.js"  defer></script>
+       
+    <script>
+        function calculate_total_bill() {
+            // Retrieve values from the input fields
+            var orderWeight = parseFloat(document.getElementById("order_weight").value);
+            var orderDistance = parseFloat(document.getElementById("order_distance").value);
+            
+            // Check if both inputs are filled
+            if (!isNaN(orderWeight) && !isNaN(orderDistance)) {
+                // Perform the calculation (replace this with your actual calculation)
+                var totalBill = (orderWeight * 10) + (orderDistance * 5); // Example calculation
+                
+                // Update the value of the total bill input field
+                document.getElementById("totalBill").value = totalBill.toFixed(2); // Set value with 2 decimal places
+            } else {
+                // If either input is not filled, set the total bill input field to empty
+                document.getElementById("totalBill").value = "";
+            }
+        }
+        
+        // Attach event listeners to call the function when inputs change
+        document.getElementById("order_weight").addEventListener("input", calculate_total_bill);
+        document.getElementById("order_distance").addEventListener("input", calculate_total_bill);
+
+        //tracking table information
+        document.getElementById('trackingForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            var trackingId = document.getElementById('trackingId').value;
+    
+            // Fetch data from Flask server
+            fetch('/get_tracking?trackingId=' + trackingId)
+            .then(response => response.json())
+            .then(data => {
+                // Display tracking information
+                var trackingResultDiv = document.getElementById('trackingResult');
+                if (data.length === 0) {
+                    trackingResultDiv.innerHTML = '<p>No tracking information found for the provided ID.</p>';
+                } else {
+                    var tableHTML = '<h3>Tracking Information</h3><table class="custom-table">';
+                    tableHTML += '<thead><tr><th>Tracking ID</th><th>Start Location</th><th>Pickup Time</th><th>Current Status</th><th>Destination Location</th><th>Received Time</th></tr></thead><tbody>';
+                    data.forEach(function(row) {
+                        tableHTML += '<tr>';
+                        tableHTML += '<td>' + row.Tracking_id + '</td>';
+                        tableHTML += '<td>' + row.Start_location + '</td>';
+                        tableHTML += '<td>' + row.Pickup_time + '</td>';
+                        tableHTML += '<td>' + row.Current_status + '</td>';
+                        tableHTML += '<td>' + row.Destination_location + '</td>';
+                        tableHTML += '<td>' + row.Received_time + '</td>';
+                        tableHTML += '</tr>';
+                    });
+                    tableHTML += '</tbody></table>';
+                    trackingResultDiv.innerHTML = tableHTML;
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching tracking data:', error);
+                document.getElementById('trackingResult').innerHTML = '<p>An error occurred while fetching tracking information. Please try again later.</p>';
+            });
+        });
+        
+    </script>
+        
+</body>
+</html>
